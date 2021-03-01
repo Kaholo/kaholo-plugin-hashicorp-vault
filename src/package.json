@@ -1,6 +1,6 @@
 {
     "name": "kaholo-plugin-hashicorp-vault",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Kaholo plaugin for Hashicorp Vault",
     "main": "app.js",
     "scripts": {
