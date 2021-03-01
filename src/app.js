@@ -25,7 +25,7 @@ function getVaultRequestOptions(params, settings){
         json : true,
         auth : {
 			bearer: token,
-            sendImmediately : true
+			sendImmediately : true
 		}
     };
 }
@@ -47,16 +47,12 @@ async function getVaultItem(action, settings){
 }
 
 async function getSecret(action, settings){
-	let getItemPromise = getVaultItem(action, settings);
-	return getItemPromise.then((vaultItem) => {
-		const dataItem = vaultItem.data.data;
-		try {
-			if (dataItem.value){
-				return dataItem.value;
-			}
-		} catch {};
-		return dataItem;
-	});
+	const vaultItem = await getVaultItem(action, settings);
+	const dataItem = vaultItem.data.data;
+	if (dataItem.value){
+		return dataItem.value;
+	}
+	return dataItem;
 }
 
 async function setVaultItem(action, settings){
