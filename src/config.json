@@ -1,77 +1,77 @@
 {
-    "name": "Hashicorp Vault",
-    "type": "executer",
-    "imgUrl": "logo.png",
-    "execProgram": "node",
-    "main": "app.js",
-    "version": "1.0.6",
-    "description": "Hashicorp Vault Plugin",
-    "settings": [
-      {
-        "name": "vaultUrl",
-        "viewName": "Vault URL",
-        "type": "string"
-      },
-      {
-        "name": "token",
-        "viewName": "Token",
-        "type": "vault"
-      }
-    ],
-    "methods": [
-      {
-        "name" : "getVaultItem",
-        "viewName": "Get Item",
-        "params": [
-          {
-            "name":"itemKey",
-            "viewName":"Item key",
-            "type":"string"
-          },
-          {
-            "name":"namespace",
-            "viewName":"Namespace",
-            "type":"string"
-          }
-        ]
-      },
-      {
-        "name" : "getSecret",
-        "viewName": "Get Secret",
-        "params": [
-          {
-            "name":"itemKey",
-            "viewName":"Item key",
-            "type":"string"
-          },
-          {
-            "name":"namespace",
-            "viewName":"Namespace",
-            "type":"string"
-          }
-        ]
-      },
-      {
-        "name" : "setVaultItem",
-        "viewName": "Set Item",
-        "params": [
-          {
-            "name":"itemKey",
-            "viewName":"Item key",
-            "type":"string"
-          },
-          {
-            "name":"namespace",
-            "viewName":"Namespace",
-            "type":"string"
-          },
-          {
-            "name":"itemVal",
-            "viewName":"Value",
-            "type":"vault"
-          }
-        ]
-      }
-    ]
-  }
-  
+  "name": "Hashicorp Vault",
+  "type": "executer",
+  "imgUrl": "logo.png",
+  "execProgram": "node",
+  "main": "app.js",
+  "version": "1.0.8",
+  "description": "Hashicorp Vault Plugin",
+  "settings": [
+    {
+      "name": "vaultUrl",
+      "viewName": "Vault URL",
+      "type": "string"
+    },
+    {
+      "name": "token",
+      "viewName": "Token",
+      "type": "vault"
+    }
+  ],
+  "methods": [
+    {
+      "name": "getVaultItem",
+      "viewName": "Get Item",
+      "params": [
+        {
+          "name": "itemKey",
+          "viewName": "Item key",
+          "type": "string"
+        },
+        {
+          "name": "namespace",
+          "viewName": "Namespace",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "getSecret",
+      "viewName": "Get Secret",
+      "params": [
+        {
+          "name": "itemKey",
+          "viewName": "Item key",
+          "type": "string"
+        },
+        {
+          "name": "namespace",
+          "viewName": "Namespace",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "setVaultItem",
+      "viewName": "Set Item",
+      "params": [
+        {
+          "name": "itemKey",
+          "viewName": "Item key",
+          "type": "string"
+        },
+        {
+          "name": "namespace",
+          "viewName": "Namespace",
+          "type": "string"
+        },
+        {
+          "name": "itemVal",
+          "viewName": "Value",
+          "type": "vault"
+        }
+      ]
+    }
+  ],
+  "category": "SECRETS"
+}
