@@ -63,7 +63,16 @@ async function createOrUpdateSecrets(params) {
     vaultUrl,
     vaultNamespace,
     secretsPath,
+    secrets,
   } = params;
+
+  return vaultService.createOrUpdateSecret(
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+    secretsPath,
+    secrets,
+  );
 }
 
 async function patchSecrets(params) {

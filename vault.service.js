@@ -35,8 +35,9 @@ async function createOrUpdateSecret(
       secretsPath,
       secrets,
     },
+    "POST",
     {
-      method: "POST",
+      "Content-Type": "application/json",
     },
   );
 
@@ -52,18 +53,19 @@ async function patchSecret(
   secretsPath,
   secrets,
 ) {
-  const endpointData = await callVaultSecretEndpoint({
-    vaultToken,
-    vaultUrl,
-    vaultNamespace,
-    secretsPath,
-    secrets,
-  }, {
-    method: "PATCH",
-    headers: {
+  const endpointData = await callVaultSecretEndpoint(
+    {
+      vaultToken,
+      vaultUrl,
+      vaultNamespace,
+      secretsPath,
+      secrets,
+    },
+    "PATCH",
+    {
       "Content-type": "application/merge-patch+json",
     },
-  });
+  );
 
   handleErrors(endpointData);
 
@@ -78,11 +80,9 @@ function generateUrlWithParams(url, params) {
 
 async function callVaultSecretEndpoint(
   apiParams,
-  requestParams = {
-    method: "GET",
-    headers: {},
-    urlParams: [],
-  },
+  method = "GET",
+  headers = {},
+  urlParams = [],
 ) {
   const {
     vaultToken,
@@ -91,12 +91,6 @@ async function callVaultSecretEndpoint(
     secretsPath,
     secrets,
   } = apiParams;
-
-  const {
-    urlParams,
-    method,
-    headers,
-  } = requestParams;
 
   let url = `${vaultUrl}${SECRET_ENDPOINT}/${secretsPath}`;
   if (urlParams.length > 0) {
@@ -113,7 +107,7 @@ async function callVaultSecretEndpoint(
   };
 
   if (secrets) {
-    options.body = JSON.stringify(secrets);
+    options.body = JSON.stringify({ data: secrets });
   }
 
   const response = await fetch(url, options);
