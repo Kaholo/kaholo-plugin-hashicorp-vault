@@ -1,5 +1,5 @@
 {
-  "name": "Hashicorp Vault",
+  "name": "HashicorpVault",
   "type": "executer",
   "imgUrl": "logo.png",
   "execProgram": "node",
@@ -8,67 +8,128 @@
   "description": "Hashicorp Vault Plugin",
   "settings": [
     {
+      "name": "vaultToken",
+      "viewName": "Token",
+      "type": "vault"
+    },
+    {
       "name": "vaultUrl",
       "viewName": "Vault URL",
       "type": "string"
     },
     {
-      "name": "token",
-      "viewName": "Token",
-      "type": "vault"
+      "name": "vaultNamespace",
+      "viewName": "Namespace",
+      "type": "string"
     }
   ],
   "methods": [
     {
-      "name": "getVaultItem",
-      "viewName": "Get Item",
+      "name": "getSecrets",
+      "viewName": "Get secrets",
       "params": [
         {
-          "name": "itemKey",
-          "viewName": "Item key",
-          "type": "string"
-        },
-        {
-          "name": "namespace",
-          "viewName": "Namespace",
-          "type": "string"
-        }
-      ]
-    },
-    {
-      "name": "getSecret",
-      "viewName": "Get Secret",
-      "params": [
-        {
-          "name": "itemKey",
-          "viewName": "Item key",
-          "type": "string"
-        },
-        {
-          "name": "namespace",
-          "viewName": "Namespace",
-          "type": "string"
-        }
-      ]
-    },
-    {
-      "name": "setVaultItem",
-      "viewName": "Set Item",
-      "params": [
-        {
-          "name": "itemKey",
-          "viewName": "Item key",
-          "type": "string"
-        },
-        {
-          "name": "namespace",
-          "viewName": "Namespace",
-          "type": "string"
-        },
-        {
-          "name": "itemVal",
-          "viewName": "Value",
+          "name": "vaultToken",
+          "viewName": "Token",
           "type": "vault"
+        },
+        {
+          "name": "vaultUrl",
+          "viewName": "Vault URL",
+          "type": "string"
+        },
+        {
+          "name": "vaultNamespace",
+          "viewName": "Namespace",
+          "type": "string"
+        },
+        {
+          "name": "secretsPath",
+          "viewName": "Path",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "getSingleSecretValue",
+      "viewName": "Get single secret value",
+      "params": [
+        {
+          "name": "vaultToken",
+          "viewName": "Token",
+          "type": "vault"
+        },
+        {
+          "name": "vaultUrl",
+          "viewName": "Vault URL",
+          "type": "string"
+        },
+        {
+          "name": "vaultNamespace",
+          "viewName": "Namespace",
+          "type": "string"
+        },
+        {
+          "name": "secretsPath",
+          "viewName": "Secrets' Path",
+          "type": "string"
+        },
+        {
+          "name": "secretsKey",
+          "viewName": "Secret's key",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "createOrUpdateSecrets",
+      "viewName": "Create or Update secrets",
+      "params": [
+        {
+          "name": "vaultToken",
+          "viewName": "Token",
+          "type": "vault"
+        },
+        {
+          "name": "vaultUrl",
+          "viewName": "Vault URL",
+          "type": "string"
+        },
+        {
+          "name": "vaultNamespace",
+          "viewName": "Namespace",
+          "type": "string"
+        },
+        {
+          "name": "secretsPath",
+          "viewName": "Path",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "patchSecrets",
+      "viewName": "Patch secrets",
+      "params": [
+        {
+          "name": "vaultToken",
+          "viewName": "Token",
+          "type": "vault"
+        },
+        {
+          "name": "vaultUrl",
+          "viewName": "Vault URL",
+          "type": "string"
+        },
+        {
+          "name": "vaultNamespace",
+          "viewName": "Namespace",
+          "type": "string"
+        },
+        {
+          "name": "secretsPath",
+          "viewName": "Path",
+          "type": "string"
         }
       ]
     }

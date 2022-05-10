@@ -1,73 +1,88 @@
-const request = require("request");
+const { bootstrap } = require("kaholo-plugin-library");
 
-function getVaultRequestOptions(params, settings) {
-  // Get token from settings, and check it exists
-  const token = (settings.token || "").trim();
-  if (!token) {
-    throw new Error("Not given token");
-  }
-  // Get item key from parameters, and check it exists
-  const itemKey = (params.itemKey || "").trim();
-  if (!itemKey) {
-    throw new Error("Not given item key");
-  }
-  // Get namespace from parameters, and check it exists
+const vaultService = require("./vault.service");
 
-  let namespace = (params.namespace || "").trim();
-  if (namespace && !namespace.endsWith("/")) {
-    namespace += "/";
-  }
-  // Get vault url from settings and add the path to the item wanted
-  const vaultUrl = `${settings.vaultUrl || "http://127.0.0.1:8200"}/v1/${namespace}secret/data/${itemKey}`;
+function validateParams(params) {
+  const {
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+  } = params;
 
-  return {
-    url: vaultUrl,
-    json: true,
-    auth: {
-      bearer: token,
-      sendImmediately: true,
-    },
-  };
+  if (!vaultToken) {
+    throw new Error("Vault Token is missing.");
+  }
+
+  if (!vaultUrl) {
+    throw new Error("Vault URL is missing.");
+  }
+
+  if (!vaultNamespace) {
+    throw new Error("Vault Namespace is missing.");
+  }
 }
 
-async function sendHttpReq(requestOptions) {
-  return new Promise((resolve, reject) => {
-    request(requestOptions, (err, response) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(response.body);
-    });
-  });
-}
-async function getVaultItem(action, settings) {
-  const requestOptions = getVaultRequestOptions(action.params, settings);
-  requestOptions.method = "GET";
-  return sendHttpReq(requestOptions);
+async function getSecrets(params) {
+  validateParams(params);
+
+  const {
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+    secretsPath,
+  } = params;
+
+  return vaultService.readSecret(
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+    secretsPath,
+  );
 }
 
-async function getSecret(action, settings) {
-  const vaultItem = await getVaultItem(action, settings);
-  const dataItem = vaultItem.data.data;
-  if (dataItem.value) {
-    return dataItem.value;
+async function getSingleSecretValue(params) {
+  validateParams(params);
+
+  const { secretsKey } = params;
+
+  const secrets = await getSecrets(params);
+
+  const secretValue = secrets[secretsKey];
+  if (secretValue === undefined) {
+    throw new Error("Secret not found");
   }
-  return dataItem;
+
+  return secretValue;
 }
 
-async function setVaultItem(action, settings) {
-  const requestOptions = getVaultRequestOptions(action.params, settings);
-  const { itemVal } = action.params;
-  if (!itemVal) {
-    throw new Error("Not given value!");
-  }
-  requestOptions.method = "POST";
-  requestOptions.body = { data: { value: itemVal } };
-  return sendHttpReq(requestOptions);
+async function createOrUpdateSecrets(params) {
+  validateParams(params);
+
+  const {
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+    secretsPath,
+  } = params;
 }
 
-module.exports = {
-  getVaultItem,
-  getSecret,
-  setVaultItem,
-};
+async function patchSecrets(params) {
+  validateParams(params);
+
+  const {
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+    secretsPath,
+  } = params;
+}
+
+module.exports = bootstrap(
+  {
+    getSecrets,
+    getSingleSecretValue,
+    createOrUpdateSecrets,
+    patchSecrets,
+  },
+  {},
+);
