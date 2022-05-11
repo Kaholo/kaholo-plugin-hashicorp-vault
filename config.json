@@ -136,6 +136,12 @@
           "name": "secretsPath",
           "viewName": "Path",
           "type": "string"
+        },
+        {
+          "name": "secrets",
+          "viewName": "Secrets",
+          "type": "string",
+          "parserType": "object"
         }
       ]
     }

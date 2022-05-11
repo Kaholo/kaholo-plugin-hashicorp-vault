@@ -2,26 +2,6 @@ const { bootstrap } = require("kaholo-plugin-library");
 
 const vaultService = require("./vault.service");
 
-function validateParams(params) {
-  const {
-    vaultToken,
-    vaultUrl,
-    vaultNamespace,
-  } = params;
-
-  if (!vaultToken) {
-    throw new Error("Vault Token is missing.");
-  }
-
-  if (!vaultUrl) {
-    throw new Error("Vault URL is missing.");
-  }
-
-  if (!vaultNamespace) {
-    throw new Error("Vault Namespace is missing.");
-  }
-}
-
 async function getSecrets(params) {
   validateParams(params);
 
@@ -43,9 +23,20 @@ async function getSecrets(params) {
 async function getSingleSecretValue(params) {
   validateParams(params);
 
-  const { secretsKey } = params;
+  const {
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+    secretsPath,
+    secretsKey,
+  } = params;
 
-  const secrets = await getSecrets(params);
+  const secrets = await getSecrets({
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+    secretsPath,
+  });
 
   const secretValue = secrets[secretsKey];
   if (secretValue === undefined) {
@@ -83,7 +74,36 @@ async function patchSecrets(params) {
     vaultUrl,
     vaultNamespace,
     secretsPath,
+    secrets,
   } = params;
+
+  return vaultService.patchSecret(
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+    secretsPath,
+    secrets,
+  );
+}
+
+function validateParams(params) {
+  const {
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+  } = params;
+
+  if (!vaultToken) {
+    throw new Error("Vault Token is missing.");
+  }
+
+  if (!vaultUrl) {
+    throw new Error("Vault URL is missing.");
+  }
+
+  if (!vaultNamespace) {
+    throw new Error("Vault Namespace is missing.");
+  }
 }
 
 module.exports = bootstrap(

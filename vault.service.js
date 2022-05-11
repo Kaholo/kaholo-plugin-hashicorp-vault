@@ -8,7 +8,7 @@ async function readSecret(
   vaultNamespace,
   secretsPath,
 ) {
-  const endpointData = await callVaultSecretEndpoint({
+  const endpointData = await callVaultSecretAPIEndpoint({
     vaultToken,
     vaultUrl,
     vaultNamespace,
@@ -27,7 +27,7 @@ async function createOrUpdateSecret(
   secretsPath,
   secrets,
 ) {
-  const endpointData = await callVaultSecretEndpoint(
+  const endpointData = await callVaultSecretAPIEndpoint(
     {
       vaultToken,
       vaultUrl,
@@ -53,7 +53,7 @@ async function patchSecret(
   secretsPath,
   secrets,
 ) {
-  const endpointData = await callVaultSecretEndpoint(
+  const endpointData = await callVaultSecretAPIEndpoint(
     {
       vaultToken,
       vaultUrl,
@@ -72,17 +72,10 @@ async function patchSecret(
   return endpointData.data.data;
 }
 
-function generateUrlWithParams(url, params) {
-  const urlParams = new URLSearchParams(params);
-
-  return `${url}?${urlParams.toString()}`;
-}
-
-async function callVaultSecretEndpoint(
+async function callVaultSecretAPIEndpoint(
   apiParams,
   method = "GET",
   headers = {},
-  urlParams = [],
 ) {
   const {
     vaultToken,
@@ -93,9 +86,6 @@ async function callVaultSecretEndpoint(
   } = apiParams;
 
   let url = `${vaultUrl}${SECRET_ENDPOINT}/${secretsPath}`;
-  if (urlParams.length > 0) {
-    url = generateUrlWithParams(url, urlParams);
-  }
 
   const options = {
     method,
