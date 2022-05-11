@@ -10,17 +10,23 @@
     {
       "name": "vaultToken",
       "viewName": "Token",
-      "type": "vault"
+      "type": "vault",
+      "description": "",
+      "learnUrl": ""
     },
     {
       "name": "vaultUrl",
       "viewName": "Vault URL",
-      "type": "string"
+      "type": "string",
+      "description": "",
+      "learnUrl": ""
     },
     {
       "name": "vaultNamespace",
       "viewName": "Namespace",
-      "type": "string"
+      "type": "string",
+      "description": "",
+      "learnUrl": ""
     }
   ],
   "methods": [
@@ -31,22 +37,31 @@
         {
           "name": "vaultToken",
           "viewName": "Token",
-          "type": "vault"
+          "type": "vault",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "vaultUrl",
           "viewName": "Vault URL",
-          "type": "string"
+          "type": "string",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "vaultNamespace",
           "viewName": "Namespace",
-          "type": "string"
+          "type": "string",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "secretsPath",
           "viewName": "Path",
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "",
+          "learnUrl": ""
         }
       ]
     },
@@ -57,27 +72,39 @@
         {
           "name": "vaultToken",
           "viewName": "Token",
-          "type": "vault"
+          "type": "vault",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "vaultUrl",
           "viewName": "Vault URL",
-          "type": "string"
+          "type": "string",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "vaultNamespace",
           "viewName": "Namespace",
-          "type": "string"
+          "type": "string",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "secretsPath",
           "viewName": "Secrets' Path",
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "secretsKey",
           "viewName": "Secret's key",
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "",
+          "learnUrl": ""
         }
       ]
     },
@@ -88,28 +115,40 @@
         {
           "name": "vaultToken",
           "viewName": "Token",
-          "type": "vault"
+          "type": "vault",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "vaultUrl",
           "viewName": "Vault URL",
-          "type": "string"
+          "type": "string",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "vaultNamespace",
           "viewName": "Namespace",
-          "type": "string"
+          "type": "string",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "secretsPath",
           "viewName": "Path",
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "secrets",
           "viewName": "Secrets",
           "type": "string",
-          "parserType": "object"
+          "parserType": "object",
+          "required": true,
+          "description": "",
+          "learnUrl": ""
         }
       ]
     },
@@ -120,28 +159,40 @@
         {
           "name": "vaultToken",
           "viewName": "Token",
-          "type": "vault"
+          "type": "vault",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "vaultUrl",
           "viewName": "Vault URL",
-          "type": "string"
+          "type": "string",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "vaultNamespace",
           "viewName": "Namespace",
-          "type": "string"
+          "type": "string",
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "secretsPath",
           "viewName": "Path",
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "",
+          "learnUrl": ""
         },
         {
           "name": "secrets",
           "viewName": "Secrets",
           "type": "string",
-          "parserType": "object"
+          "parserType": "object",
+          "required": true,
+          "description": "",
+          "learnUrl": ""
         }
       ]
     }

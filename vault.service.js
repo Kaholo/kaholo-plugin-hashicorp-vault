@@ -85,7 +85,7 @@ async function callVaultSecretAPIEndpoint(
     secrets,
   } = apiParams;
 
-  let url = `${vaultUrl}${SECRET_ENDPOINT}/${secretsPath}`;
+  const url = `${vaultUrl}${SECRET_ENDPOINT}/${secretsPath}`;
 
   const options = {
     method,
