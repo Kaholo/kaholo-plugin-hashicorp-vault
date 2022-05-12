@@ -15,51 +15,38 @@
     "store",
     "storage"
   ],
-  "settings": [
-    {
+  "auth": {
+    "authId": "hashicorpVault",
+    "params": [{
       "name": "vaultToken",
       "viewName": "Token",
-      "type": "vault"
+      "type": "vault",
+      "description": "Token authenticating the request",
+      "placeholder": "s.ljoOWCe8LlCcFIE6399ueJjb.vITPx",
+      "learnUrl": "https://www.vaultproject.io/docs/concepts/tokens"
     },
-    {
-      "name": "vaultUrl",
-      "viewName": "Vault URL",
-      "type": "string"
-    },
-    {
-      "name": "vaultNamespace",
-      "viewName": "Namespace",
-      "type": "string"
-    }
-  ],
+      {
+        "name": "vaultUrl",
+        "viewName": "Vault URL",
+        "type": "string",
+        "description": "URL pointing to Vault at either Hashicorp cluster or local server",
+        "placeholder": "https://vault-cluster.vault.f4e25d90-c2e3-40f3-af32-076af5181d0c.aws.hashicorp.cloud:8200",
+        "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/get-started-vault?in=vault/cloud"
+      },
+      {
+        "name": "vaultNamespace",
+        "viewName": "Namespace",
+        "type": "string",
+        "description": "The default for the cluster is \"admin\", and \"root\" for own servers.",
+        "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
+      }
+    ]
+  },
   "methods": [
     {
       "name": "getSecrets",
       "viewName": "Get secrets",
       "params": [
-        {
-          "name": "vaultToken",
-          "viewName": "Token",
-          "type": "vault",
-          "description": "Token authenticating the request",
-          "placeholder": "s.ljoOWCe8LlCcFIE6399ueJjb.vITPx",
-          "learnUrl": "https://www.vaultproject.io/docs/concepts/tokens"
-        },
-        {
-          "name": "vaultUrl",
-          "viewName": "Vault URL",
-          "type": "string",
-          "description": "URL pointing to Vault at either Hashicorp cluster or local server",
-          "placeholder": "https://vault-cluster.vault.f4e25d90-c2e3-40f3-af32-076af5181d0c.aws.hashicorp.cloud:8200",
-          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/get-started-vault?in=vault/cloud"
-        },
-        {
-          "name": "vaultNamespace",
-          "viewName": "Namespace",
-          "type": "string",
-          "description": "The default for the cluster is \"admin\", and \"root\" for own servers.",
-          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
-        },
         {
           "name": "secretsPath",
           "viewName": "Secrets' Path",
@@ -74,29 +61,6 @@
       "name": "getSingleSecretValue",
       "viewName": "Get single secret value",
       "params": [
-        {
-          "name": "vaultToken",
-          "viewName": "Token",
-          "type": "vault",
-          "description": "Token authenticating the request",
-          "placeholder": "s.ljoOWCe8LlCcFIE6399ueJjb.vITPx",
-          "learnUrl": "https://www.vaultproject.io/docs/concepts/tokens"
-        },
-        {
-          "name": "vaultUrl",
-          "viewName": "Vault URL",
-          "type": "string",
-          "description": "URL pointing to Vault at either Hashicorp cluster or local server",
-          "placeholder": "https://vault-cluster.vault.f4e25d90-c2e3-40f3-af32-076af5181d0c.aws.hashicorp.cloud:8200",
-          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/get-started-vault?in=vault/cloud"
-        },
-        {
-          "name": "vaultNamespace",
-          "viewName": "Namespace",
-          "type": "string",
-          "description": "The default for the cluster is \"admin\", and \"root\" for own servers.",
-          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
-        },
         {
           "name": "secretsPath",
           "viewName": "Secrets' Path",
@@ -119,37 +83,6 @@
       "viewName": "Set secrets (Put)",
       "params": [
         {
-          "name": "vaultToken",
-          "viewName": "Token",
-          "type": "vault",
-          "description": "Token authenticating the request",
-          "placeholder": "s.ljoOWCe8LlCcFIE6399ueJjb.vITPx",
-          "learnUrl": "https://www.vaultproject.io/docs/concepts/tokens"
-        },
-        {
-          "name": "vaultUrl",
-          "viewName": "Vault URL",
-          "type": "string",
-          "description": "URL pointing to Vault at either Hashicorp cluster or local server",
-          "placeholder": "https://vault-cluster.vault.f4e25d90-c2e3-40f3-af32-076af5181d0c.aws.hashicorp.cloud:8200",
-          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/get-started-vault?in=vault/cloud"
-        },
-        {
-          "name": "vaultNamespace",
-          "viewName": "Namespace",
-          "type": "string",
-          "description": "The default for the cluster is \"admin\", and \"root\" for own servers.",
-          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
-        },
-        {
-          "name": "secretsPath",
-          "viewName": "Secrets' Path",
-          "type": "string",
-          "required": true,
-          "description": "A path identifying the secrets location at your Secret Storage",
-          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#create-secrets"
-        },
-        {
           "name": "secrets",
           "viewName": "Secrets",
           "type": "string",
@@ -164,29 +97,6 @@
       "name": "patchSecrets",
       "viewName": "Add secrets (Patch)",
       "params": [
-        {
-          "name": "vaultToken",
-          "viewName": "Token",
-          "type": "vault",
-          "description": "Token authenticating the request",
-          "placeholder": "s.ljoOWCe8LlCcFIE6399ueJjb.vITPx",
-          "learnUrl": "https://www.vaultproject.io/docs/concepts/tokens"
-        },
-        {
-          "name": "vaultUrl",
-          "viewName": "Vault URL",
-          "type": "string",
-          "description": "URL pointing to Vault at either Hashicorp cluster or local server",
-          "placeholder": "https://vault-cluster.vault.f4e25d90-c2e3-40f3-af32-076af5181d0c.aws.hashicorp.cloud:8200",
-          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/get-started-vault?in=vault/cloud"
-        },
-        {
-          "name": "vaultNamespace",
-          "viewName": "Namespace",
-          "type": "string",
-          "description": "The default for the cluster is \"admin\", and \"root\" for own servers.",
-          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
-        },
         {
           "name": "secretsPath",
           "viewName": "Secrets' Path",
