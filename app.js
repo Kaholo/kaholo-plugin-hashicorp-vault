@@ -46,7 +46,7 @@ async function getSingleSecretValue(params) {
   return secretValue;
 }
 
-async function createOrUpdateSecrets(params) {
+async function putSecrets(params) {
   validateParams(params);
 
   const {
@@ -110,7 +110,7 @@ module.exports = bootstrap(
   {
     getSecrets,
     getSingleSecretValue,
-    createOrUpdateSecrets,
+    putSecrets,
     patchSecrets,
   },
   {},
