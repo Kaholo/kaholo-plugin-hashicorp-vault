@@ -107,7 +107,8 @@ async function callVaultSecretAPIEndpoint(
 function handleErrors(endpointData) {
   const { errors } = endpointData;
   if (errors) {
-    throw new Error(`Endpoint returned errors: ${errors[0]}`);
+    const errorsString = errors.join("\n");
+    throw new Error(`Endpoint returned errors:\n${errorsString}`);
   }
 }
 
