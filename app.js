@@ -2,41 +2,51 @@ const { bootstrap } = require("kaholo-plugin-library");
 
 const vaultService = require("./vault.service");
 
-async function getSecrets(params) {
-  validateParams(params);
+function validateSecretsPath(secretsPath) {
+  if (!secretsPath.includes("/")) {
+    throw new Error("Invalid path. Cannot distinguish engine mount from secret subpath, eg. 'mount/my-secret'.");
+  }
+}
 
+async function getSecrets(params) {
   const {
     vaultToken,
     vaultUrl,
+    secretsEngineVersion,
     vaultNamespace,
     secretsPath,
   } = params;
 
-  return vaultService.readSecret(
+  validateSecretsPath(secretsPath);
+
+  return vaultService.readSecrets(
     vaultToken,
     vaultUrl,
     vaultNamespace,
     secretsPath,
+    secretsEngineVersion,
   );
 }
 
 async function getSingleSecretValue(params) {
-  validateParams(params);
-
   const {
     vaultToken,
     vaultUrl,
     vaultNamespace,
+    secretsEngineVersion,
     secretsPath,
     secretsKey,
   } = params;
 
-  const secrets = await getSecrets({
+  validateSecretsPath(secretsPath);
+
+  const secrets = await vaultService.readSecrets(
     vaultToken,
     vaultUrl,
     vaultNamespace,
     secretsPath,
-  });
+    secretsEngineVersion,
+  );
 
   const secretValue = secrets[secretsKey];
   if (secretValue === undefined) {
@@ -47,63 +57,47 @@ async function getSingleSecretValue(params) {
 }
 
 async function putSecrets(params) {
-  validateParams(params);
-
   const {
     vaultToken,
     vaultUrl,
     vaultNamespace,
+    secretsEngineVersion,
     secretsPath,
     secrets,
   } = params;
 
-  return vaultService.createOrUpdateSecret(
+  validateSecretsPath(secretsPath);
+
+  return vaultService.putSecrets(
     vaultToken,
     vaultUrl,
     vaultNamespace,
     secretsPath,
     secrets,
+    secretsEngineVersion,
   );
 }
 
 async function patchSecrets(params) {
-  validateParams(params);
-
   const {
     vaultToken,
     vaultUrl,
     vaultNamespace,
+    secretsEngineVersion,
     secretsPath,
     secrets,
   } = params;
 
-  return vaultService.patchSecret(
+  validateSecretsPath(secretsPath);
+
+  return vaultService.patchSecrets(
     vaultToken,
     vaultUrl,
     vaultNamespace,
     secretsPath,
     secrets,
+    secretsEngineVersion,
   );
-}
-
-function validateParams(params) {
-  const {
-    vaultToken,
-    vaultUrl,
-    vaultNamespace,
-  } = params;
-
-  if (!vaultToken) {
-    throw new Error("Vault Token is missing.");
-  }
-
-  if (!vaultUrl) {
-    throw new Error("Vault URL is missing.");
-  }
-
-  if (!vaultNamespace) {
-    throw new Error("Vault Namespace is missing.");
-  }
 }
 
 module.exports = bootstrap(

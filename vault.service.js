@@ -2,37 +2,43 @@ const fetch = require("node-fetch");
 
 const SECRET_ENDPOINT = "/v1/secret/data";
 
-async function readSecret(
+async function readSecrets(
   vaultToken,
   vaultUrl,
   vaultNamespace,
   secretsPath,
+  secretsEngineVersion,
 ) {
+  const standardizedSecretsPath = adjustPathToEngineVersion(secretsPath, secretsEngineVersion);
+
   const endpointData = await callVaultSecretAPIEndpoint({
     vaultToken,
     vaultUrl,
     vaultNamespace,
-    secretsPath,
+    standardizedSecretsPath,
   });
 
   handleErrors(endpointData);
 
-  return endpointData.data.data;
+  return extractData(secretsEngineVersion, endpointData);
 }
 
-async function createOrUpdateSecret(
+async function putSecrets(
   vaultToken,
   vaultUrl,
   vaultNamespace,
   secretsPath,
   secrets,
+  secretsEngineVersion,
 ) {
+  const standardizedSecretsPath = adjustPathToEngineVersion(secretsPath, secretsEngineVersion);
+
   const endpointData = await callVaultSecretAPIEndpoint(
     {
       vaultToken,
       vaultUrl,
       vaultNamespace,
-      secretsPath,
+      standardizedSecretsPath,
       secrets,
     },
     "POST",
@@ -43,22 +49,25 @@ async function createOrUpdateSecret(
 
   handleErrors(endpointData);
 
-  return endpointData.data.data;
+  return extractData(secretsEngineVersion, endpointData);
 }
 
-async function patchSecret(
+async function patchSecrets(
   vaultToken,
   vaultUrl,
   vaultNamespace,
   secretsPath,
   secrets,
+  secretsEngineVersion,
 ) {
+  const standardizedSecretsPath = adjustPathToEngineVersion(secretsPath, secretsEngineVersion);
+
   const endpointData = await callVaultSecretAPIEndpoint(
     {
       vaultToken,
       vaultUrl,
       vaultNamespace,
-      secretsPath,
+      standardizedSecretsPath,
       secrets,
     },
     "PATCH",
@@ -69,7 +78,22 @@ async function patchSecret(
 
   handleErrors(endpointData);
 
-  return endpointData.data.data;
+  return extractData(secretsEngineVersion, endpointData);
+}
+
+function adjustPathToEngineVersion(path, version) {
+  if (version === "v1") {
+    return path;
+  }
+
+  const pathElements = path.split("/");
+  pathElements.splice(1, 0, 'data');
+
+  return pathElements.join("/");
+}
+
+function extractData(secretsEngineVersion, endpointData) {
+  return secretsEngineVersion === "v1" ? endpointData.data : endpointData.data.data;
 }
 
 async function callVaultSecretAPIEndpoint(
@@ -113,7 +137,7 @@ function handleErrors(endpointData) {
 }
 
 module.exports = {
-  readSecret,
-  createOrUpdateSecret,
-  patchSecret,
+  readSecrets,
+  putSecrets,
+  patchSecrets,
 };
