@@ -1,7 +1,5 @@
 const fetch = require("node-fetch");
 
-const SECRET_ENDPOINT = "/v1/secret/data";
-
 async function readSecrets(
   vaultToken,
   vaultUrl,
@@ -15,7 +13,7 @@ async function readSecrets(
     vaultToken,
     vaultUrl,
     vaultNamespace,
-    standardizedSecretsPath,
+    secretsPath: standardizedSecretsPath,
   });
 
   handleErrors(endpointData);
@@ -32,14 +30,15 @@ async function putSecrets(
   secretsEngineVersion,
 ) {
   const standardizedSecretsPath = adjustPathToEngineVersion(secretsPath, secretsEngineVersion);
+  const standardizedSecrets = prepareSecrets(secrets, secretsEngineVersion);
 
   const endpointData = await callVaultSecretAPIEndpoint(
     {
       vaultToken,
       vaultUrl,
       vaultNamespace,
-      standardizedSecretsPath,
-      secrets,
+      secretsPath: standardizedSecretsPath,
+      secrets: standardizedSecrets,
     },
     "POST",
     {
@@ -61,14 +60,15 @@ async function patchSecrets(
   secretsEngineVersion,
 ) {
   const standardizedSecretsPath = adjustPathToEngineVersion(secretsPath, secretsEngineVersion);
+  const standardizedSecrets = prepareSecrets(secrets, secretsEngineVersion);
 
   const endpointData = await callVaultSecretAPIEndpoint(
     {
       vaultToken,
       vaultUrl,
       vaultNamespace,
-      standardizedSecretsPath,
-      secrets,
+      secretsPath: standardizedSecretsPath,
+      secrets: standardizedSecrets,
     },
     "PATCH",
     {
@@ -92,7 +92,19 @@ function adjustPathToEngineVersion(path, version) {
   return pathElements.join("/");
 }
 
+function prepareSecrets(secrets, version) {
+  if (version === "v1") {
+    return secrets;
+  }
+
+  return { data: secrets };
+}
+
 function extractData(secretsEngineVersion, endpointData) {
+  if (!endpointData) {
+    return "Request returned empty response.";
+  }
+
   return secretsEngineVersion === "v1" ? endpointData.data : endpointData.data.data;
 }
 
@@ -109,7 +121,7 @@ async function callVaultSecretAPIEndpoint(
     secrets,
   } = apiParams;
 
-  const url = `${vaultUrl}${SECRET_ENDPOINT}/${secretsPath}`;
+  const url = `${vaultUrl}/v1/${secretsPath}`;
 
   const options = {
     method,
@@ -121,14 +133,19 @@ async function callVaultSecretAPIEndpoint(
   };
 
   if (secrets) {
-    options.body = JSON.stringify({ data: secrets });
+    options.body = JSON.stringify(secrets);
   }
 
   const response = await fetch(url, options);
-  return response.json();
+  const responseText = await response.text();
+  return responseText ? JSON.parse(responseText) : null;
 }
 
 function handleErrors(endpointData) {
+  if (!endpointData) {
+    return;
+  }
+
   const { errors } = endpointData;
   if (errors) {
     const errorsString = errors.join("\n");

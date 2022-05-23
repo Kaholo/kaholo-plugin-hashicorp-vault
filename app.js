@@ -88,6 +88,10 @@ async function patchSecrets(params) {
     secrets,
   } = params;
 
+  if (secretsEngineVersion === "v1") {
+    throw new Error("Vault Secret Engine v1 does not support secrets addition (PATCH method).");
+  }
+
   validateSecretsPath(secretsPath);
 
   return vaultService.patchSecrets(

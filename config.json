@@ -62,19 +62,19 @@
           "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#enable-secrets-engine"
         },
         {
-          "name": "vaultNamespace",
-          "viewName": "Namespace",
-          "type": "string",
-          "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
-          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
-        },
-        {
           "name": "secretsPath",
           "viewName": "Secrets' Path",
           "type": "string",
           "required": true,
           "description": "A path identifying the secrets location at your Secret Storage",
           "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#create-secrets"
+        },
+        {
+          "name": "vaultNamespace",
+          "viewName": "Namespace",
+          "type": "string",
+          "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
+          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
         }
       ]
     },
@@ -101,13 +101,6 @@
           "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#enable-secrets-engine"
         },
         {
-          "name": "vaultNamespace",
-          "viewName": "Namespace",
-          "type": "string",
-          "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
-          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
-        },
-        {
           "name": "secretsPath",
           "viewName": "Secrets' Path",
           "type": "string",
@@ -121,6 +114,13 @@
           "type": "string",
           "required": true,
           "description": "Key identifying the secret value to fetch"
+        },
+        {
+          "name": "vaultNamespace",
+          "viewName": "Namespace",
+          "type": "string",
+          "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
+          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
         }
       ]
     },
@@ -147,13 +147,6 @@
           "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#enable-secrets-engine"
         },
         {
-          "name": "vaultNamespace",
-          "viewName": "Namespace",
-          "type": "string",
-          "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
-          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
-        },
-        {
           "name": "secretsPath",
           "viewName": "Secrets' Path",
           "type": "string",
@@ -168,6 +161,13 @@
           "parserType": "object",
           "required": true,
           "description": "String representing JSON object containing the secrets"
+        },
+        {
+          "name": "vaultNamespace",
+          "viewName": "Namespace",
+          "type": "string",
+          "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
+          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
         }
       ]
     },
@@ -194,13 +194,6 @@
           "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#enable-secrets-engine"
         },
         {
-          "name": "vaultNamespace",
-          "viewName": "Namespace",
-          "type": "string",
-          "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
-          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
-        },
-        {
           "name": "secretsPath",
           "viewName": "Secrets' Path",
           "type": "string",
@@ -215,6 +208,13 @@
           "parserType": "object",
           "required": true,
           "description": "String representing JSON object containing the secrets"
+        },
+        {
+          "name": "vaultNamespace",
+          "viewName": "Namespace",
+          "type": "string",
+          "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
+          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
         }
       ]
     }
