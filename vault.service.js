@@ -102,7 +102,7 @@ function prepareSecrets(secrets, version) {
 
 function extractData(secretsEngineVersion, endpointData) {
   if (!endpointData) {
-    return "Request returned empty response.";
+    return "Operation completed successfully.";
   }
 
   return secretsEngineVersion === "v1" ? endpointData.data : endpointData.data.data;
