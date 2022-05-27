@@ -217,6 +217,25 @@
           "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
         }
       ]
+    },
+    {
+      "name": "runVaultCommand",
+      "viewName": "Run Vault Command",
+      "params": [
+        {
+          "name": "vaultNamespace",
+          "viewName": "Namespace",
+          "type": "string",
+          "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
+          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
+        },
+        {
+          "name": "command",
+          "viewName": "Command",
+          "type": "string",
+          "learnUrl": "https://www.vaultproject.io/docs/commands"
+        }
+      ]
     }
   ]
 }
