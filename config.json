@@ -4,7 +4,7 @@
   "imgUrl": "logo.png",
   "execProgram": "node",
   "main": "app.js",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Hashicorp Vault Plugin",
   "category": "SECRETS",
   "keywords": [
