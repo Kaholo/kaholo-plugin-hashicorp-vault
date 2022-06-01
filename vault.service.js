@@ -87,7 +87,7 @@ function adjustPathToEngineVersion(path, version) {
   }
 
   const pathElements = path.split("/");
-  pathElements.splice(1, 0, 'data');
+  pathElements.splice(1, 0, "data");
 
   return pathElements.join("/");
 }
