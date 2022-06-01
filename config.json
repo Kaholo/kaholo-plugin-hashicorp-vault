@@ -4,7 +4,7 @@
   "imgUrl": "logo.png",
   "execProgram": "node",
   "main": "app.js",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Hashicorp Vault Plugin",
   "category": "SECRETS",
   "keywords": [
@@ -208,6 +208,26 @@
           "parserType": "object",
           "required": true,
           "description": "String representing JSON object containing the secrets"
+        },
+        {
+          "name": "vaultNamespace",
+          "viewName": "Namespace",
+          "type": "string",
+          "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
+          "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
+        }
+      ]
+    },
+    {
+      "name": "runVaultCommand",
+      "viewName": "Run Vault Command",
+      "params": [
+        {
+          "name": "command",
+          "viewName": "Command",
+          "type": "string",
+          "required": true,
+          "learnUrl": "https://www.vaultproject.io/docs/commands"
         },
         {
           "name": "vaultNamespace",

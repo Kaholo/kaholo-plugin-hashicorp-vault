@@ -1,6 +1,7 @@
-const { bootstrap } = require("kaholo-plugin-library");
+const { bootstrap } = require("@kaholo/plugin-library");
 
 const vaultService = require("./vault.service");
+const vaultCliService = require("./vault-cli.service");
 
 function validateSecretsPath(secretsPath) {
   if (!secretsPath.includes("/")) {
@@ -104,12 +105,31 @@ async function patchSecrets(params) {
   );
 }
 
+function runVaultCommand(params) {
+  const {
+    vaultToken,
+    vaultUrl,
+    vaultNamespace,
+    command,
+  } = params;
+
+  return vaultCliService.executeCommand(
+    command,
+    {
+      token: vaultToken,
+      address: vaultUrl,
+      namespace: vaultNamespace,
+    },
+  );
+}
+
 module.exports = bootstrap(
   {
     getSecrets,
     getSingleSecretValue,
     putSecrets,
     patchSecrets,
+    runVaultCommand,
   },
   {},
 );
