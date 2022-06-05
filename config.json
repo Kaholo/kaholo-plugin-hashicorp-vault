@@ -1,19 +1,24 @@
 {
   "name": "HashicorpVault",
+  "viewName": "Hashicorp Vault",
   "type": "executer",
   "imgUrl": "logo.png",
   "execProgram": "node",
   "main": "app.js",
-  "version": "2.2.0",
-  "description": "Hashicorp Vault Plugin",
-  "category": "SECRETS",
+  "version": "2.2.1",
+  "description": "Vault secures and stores tokens, passwords, keys, and other secrets",
+  "category": "Secrets",
   "keywords": [
     "hashi",
     "hashicorp",
     "vault",
-    "secret",
+    "secrets",
     "store",
-    "storage"
+    "tokens",
+    "passwords",
+    "certificate",
+    "keys",
+    "cli"
   ],
   "auth": {
     "authId": "hashicorpVault",
