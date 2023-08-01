@@ -6,7 +6,7 @@
   "execProgram": "node",
   "main": "app.js",
   "version": "2.2.1",
-  "description": "Vault secures and stores tokens, passwords, keys, and other secrets",
+  "description": "Secures and stores tokens, passwords, keys, and other secrets",
   "category": "Secrets",
   "keywords": [
     "hashicorp",
@@ -45,12 +45,21 @@
   "methods": [
     {
       "name": "getSecrets",
-      "viewName": "Get Secrets",
+      "viewName": "Get Secret",
       "params": [
+        {
+          "name": "secretsPath",
+          "viewName": "Secret Path",
+          "type": "string",
+          "required": true,
+          "description": "A path identifying a secrets engine and secret in the server",
+          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#create-secrets"
+        },
         {
           "name": "secretsEngineVersion",
           "viewName": "Secrets Engine Version",
           "required": true,
+          "default": "v1",
           "type": "options",
           "options": [
             {
@@ -66,14 +75,6 @@
           "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#enable-secrets-engine"
         },
         {
-          "name": "secretsPath",
-          "viewName": "Secrets Engine Path",
-          "type": "string",
-          "required": true,
-          "description": "A path identifying a secrets engine in the server",
-          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#create-secrets"
-        },
-        {
           "name": "vaultNamespace",
           "viewName": "Namespace",
           "type": "string",
@@ -87,9 +88,25 @@
       "viewName": "Get Single Secret Value",
       "params": [
         {
+          "name": "secretsPath",
+          "viewName": "Secret Path",
+          "type": "string",
+          "required": true,
+          "description": "A path identifying a secrets engine and secret in the server",
+          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#create-secrets"
+        },
+        {
+          "name": "secretsKey",
+          "viewName": "Secret's Key",
+          "type": "string",
+          "required": true,
+          "description": "Key identifying the value to retrieve"
+        },
+        {
           "name": "secretsEngineVersion",
           "viewName": "Secrets Engine Version",
           "required": true,
+          "default": "v1",
           "type": "options",
           "options": [
             {
@@ -103,21 +120,6 @@
           ],
           "description": "Secrets Engine Version specified during its setup",
           "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#enable-secrets-engine"
-        },
-        {
-          "name": "secretsPath",
-          "viewName": "Secrets Engine Path",
-          "type": "string",
-          "required": true,
-          "description": "A path identifying a secrets engine in the server",
-          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#create-secrets"
-        },
-        {
-          "name": "secretsKey",
-          "viewName": "Secret's Key",
-          "type": "string",
-          "required": true,
-          "description": "Key identifying the value to retrieve"
         },
         {
           "name": "vaultNamespace",
@@ -133,9 +135,26 @@
       "viewName": "Set Secret (Put)",
       "params": [
         {
+          "name": "secretsPath",
+          "viewName": "Secret Path",
+          "type": "string",
+          "required": true,
+          "description": "A path identifying a secrets engine and secret in the server",
+          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#create-secrets"
+        },
+        {
+          "name": "secrets",
+          "viewName": "Secret",
+          "type": "vault",
+          "parserType": "object",
+          "required": true,
+          "description": "String representing JSON object containing the secrets"
+        },
+        {
           "name": "secretsEngineVersion",
           "viewName": "Secrets Engine Version",
           "required": true,
+          "default": "v1",
           "type": "options",
           "options": [
             {
@@ -149,22 +168,6 @@
           ],
           "description": "Secrets Engine Version specified during its setup",
           "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#enable-secrets-engine"
-        },
-        {
-          "name": "secretsPath",
-          "viewName": "Secrets Engine Path",
-          "type": "string",
-          "required": true,
-          "description": "A path identifying a secrets engine in the server",
-          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#create-secrets"
-        },
-        {
-          "name": "secrets",
-          "viewName": "Secrets",
-          "type": "vault",
-          "parserType": "object",
-          "required": true,
-          "description": "String representing JSON object containing the secrets"
         },
         {
           "name": "vaultNamespace",
@@ -180,9 +183,26 @@
       "viewName": "Add Secret (Patch)",
       "params": [
         {
+          "name": "secretsPath",
+          "viewName": "Secret Path",
+          "type": "string",
+          "required": true,
+          "description": "A path identifying a secrets engine and secret in the server",
+          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#create-secrets"
+        },
+        {
+          "name": "secrets",
+          "viewName": "Secret",
+          "type": "vault",
+          "parserType": "object",
+          "required": true,
+          "description": "String representing JSON object containing the secrets"
+        },
+        {
           "name": "secretsEngineVersion",
           "viewName": "Secrets Engine Version",
           "required": true,
+          "default": "v2",
           "type": "options",
           "options": [
             {
@@ -196,22 +216,6 @@
           ],
           "description": "Secrets Engine Version specified during its setup",
           "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#enable-secrets-engine"
-        },
-        {
-          "name": "secretsPath",
-          "viewName": "Secrets Engine Path",
-          "type": "string",
-          "required": true,
-          "description": "A path identifying a secrets engine in the server",
-          "learnUrl": "https://learn.hashicorp.com/tutorials/cloud/vault-first-secrets?in=vault/cloud#create-secrets"
-        },
-        {
-          "name": "secrets",
-          "viewName": "Secrets",
-          "type": "vault",
-          "parserType": "object",
-          "required": true,
-          "description": "String representing JSON object containing the secrets"
         },
         {
           "name": "vaultNamespace",
