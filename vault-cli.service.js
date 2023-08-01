@@ -2,7 +2,7 @@ const { promisify } = require("util");
 
 const exec = promisify(require("child_process").exec);
 
-const DOCKER_IMAGE_NAME = "vault";
+const DOCKER_IMAGE_NAME = "hashicorp/vault";
 const CLI_COMMAND = "vault";
 
 async function executeCommand(command, auth) {
@@ -14,7 +14,10 @@ async function executeCommand(command, auth) {
     env: environmentalVariables,
   });
 
-  return result;
+  if (result.stderr) {
+    console.error(result.stderr);
+  }
+  return result.stdout;
 }
 
 function createDockerCommand(command, enviromentalVariables) {
@@ -40,6 +43,7 @@ function createEnviromentalVariables(auth) {
     token,
     address,
     namespace,
+    jsonOutput,
   } = auth;
 
   const environmentalVariables = {
@@ -49,6 +53,10 @@ function createEnviromentalVariables(auth) {
 
   if (namespace) {
     environmentalVariables.VAULT_NAMESPACE = namespace;
+  }
+
+  if (jsonOutput) {
+    environmentalVariables.VAULT_FORMAT = "json";
   }
 
   return environmentalVariables;

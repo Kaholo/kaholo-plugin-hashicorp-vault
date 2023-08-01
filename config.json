@@ -240,6 +240,13 @@
           "type": "string",
           "description": "The default for the cluster is \"admin\", and \"root\" or empty for other servers.",
           "learnUrl": "https://www.vaultproject.io/docs/enterprise/namespaces"
+        },
+        {
+          "name": "jsonOutput",
+          "viewName": "Output in JSON Format",
+          "type": "boolean",
+          "description": "Sets VAULT_FORMAT=json to get output readily accessible from the code layer",
+          "default": true
         }
       ]
     }
