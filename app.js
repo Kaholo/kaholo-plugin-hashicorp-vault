@@ -120,7 +120,7 @@ function runVaultCommand(params) {
       token: vaultToken,
       address: vaultUrl,
       namespace: vaultNamespace,
-      jsonOutput: jsonOutput,
+      jsonOutput,
     },
   );
 }
