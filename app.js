@@ -111,6 +111,7 @@ function runVaultCommand(params) {
     vaultUrl,
     vaultNamespace,
     command,
+    jsonOutput,
   } = params;
 
   return vaultCliService.executeCommand(
@@ -119,6 +120,7 @@ function runVaultCommand(params) {
       token: vaultToken,
       address: vaultUrl,
       namespace: vaultNamespace,
+      jsonOutput,
     },
   );
 }
