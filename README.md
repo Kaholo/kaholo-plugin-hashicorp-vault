@@ -25,7 +25,7 @@ The vault must be started and unsealed before the plugin will be able to access 
 Three fundamentally important configuration items are managed using the Accounts feature. These generally don't change unless you are using more than one Hashicorp Vault server or service.
 
 * Token(Required) - Authentication token to access the vault. The value passed is of a vault type, meaning it needs to be saved as Kaholo vault item first. If you use the Hashicorp Vault CLI, you may find your token in `~/.vault-token`. Tokens look something like this: `hvs.hqvPPyzaYlJhX6z5IRWft9t0`
-* Vault URL - The URL to access the vault, including either http or https, the IP address and port of the Hashicorp Vault server. If not provided the plugin will try to use https://127.0.0.1:8200.
+* Vault URL - The URL to access the vault, including either http or https, the IP address and port of the Hashicorp Vault server. For example `http://myvault.devtest.net:8200`.
 
 The token is stored in the Kaholo Vault and then both token and Vault URL may be configured in a Kaholo Plugin Account. To access the plugin accounts, go to Settings | Plugins, search for the Hashicorp plugin, and click on the blue hyperlink 'Hashicorp Vault' that is the name of the plugin. The second tab, "Accounts" is where the plugin account is configured. Alternatively, by adding a Hashicorp Vault to a pipeline and selecting any method the Account parameter at the action level includes a "Add New Kaholo Account" feature that may also be used to configure the account. If an account is configured to be the default account, any new Hashicorp Vault actions created will inherit that account, by default.
 

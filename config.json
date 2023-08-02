@@ -5,7 +5,7 @@
   "imgUrl": "logo.png",
   "execProgram": "node",
   "main": "app.js",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Secures and stores tokens, passwords, keys, and other secrets",
   "category": "Secrets",
   "keywords": [
